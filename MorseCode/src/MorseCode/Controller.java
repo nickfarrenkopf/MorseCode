@@ -1,5 +1,6 @@
 package MorseCode;
-import java.io.File;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -7,7 +8,6 @@ import java.util.TimerTask;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-
 import GUI.Frame;
 import GUI.Screen;
 
@@ -76,18 +76,21 @@ public class Controller {
 		dotClip = null;
 		dashClip = null;
 		unitLength = 0;
+		puzzle = "Entered?";
 		
 		// Try to load file and play it
 		try {
 			// Load dot audio file
-			File dotFile = new File(System.getProperty("user.dir") + "\\Dot.wav");
-			AudioInputStream dotAudio = AudioSystem.getAudioInputStream(dotFile);
+			InputStream dotStream = getClass().getResourceAsStream("/Dot.wav");
+			BufferedInputStream dotbis = new BufferedInputStream(dotStream);
+			AudioInputStream dotAudio = AudioSystem.getAudioInputStream(dotbis);
 			dotClip = AudioSystem.getClip();
 			dotClip.open(dotAudio);
-
+			
 			// Load dash audio file
-			File dashFile = new File(System.getProperty("user.dir") + "\\Dash.wav");
-			AudioInputStream dashAudio = AudioSystem.getAudioInputStream(dashFile);
+			InputStream dashStream = Controller.class.getResourceAsStream("/Dash.wav");
+			BufferedInputStream dashbis = new BufferedInputStream(dashStream);
+			AudioInputStream dashAudio = AudioSystem.getAudioInputStream(dashbis);
 			dashClip = AudioSystem.getClip();
 			dashClip.open(dashAudio);
 
@@ -99,6 +102,7 @@ public class Controller {
 
 		// Exception catch
 		} catch (Exception e) {
+			//puzzle = e.getMessage();
 			e.printStackTrace();
 		}
 	}
