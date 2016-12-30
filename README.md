@@ -8,6 +8,7 @@ For executable jar files, head to
 https://drive.google.com/open?id=0B8yloXKNmwBVZ0xxazZuZ2lDQW8
 
 Commit 1: Bulk of code.
+Commit 2: Changed file retrieval system.
 
 - Nick Farrenkopf
 12/29/2016
